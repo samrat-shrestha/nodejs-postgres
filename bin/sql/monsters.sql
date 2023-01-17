@@ -1,3 +1,5 @@
+CREATE extension postgis;
+
 CREATE TABLE monsters(
   id serial,
   name character varying(50),
@@ -24,6 +26,10 @@ CREATE TABLE meetups(
   description character varying(150)
 );
 
+CREATE TABLE geomtable (
+gid serial PRIMARY KEY,
+geom geometry);
+
 INSERT INTO monsters(name, personality)
 VALUES
 ('Fluffy', 'aggressive'),
@@ -41,3 +47,8 @@ VALUES
 ('Fluffy', 'desert'),
 ('Noodles', 'forrest'),
 ('Rusty', 'mountain');
+
+INSERT INTO geomtable(geom) VALUES (ST_GeomFromGeoJSON('{"type" : "Polygon",
+"coordinates" : [[[85.322108, 27.711694],
+[85.522108, 27.411694],
+[85.722108, 27.911694]]]}'))
